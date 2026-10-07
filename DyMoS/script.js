@@ -1,20 +1,7 @@
 (function () {
-  var diagBox = null;
+  // Log load problems to the console only; never draw them on the page.
   function diag(msg) {
-    if (!diagBox) {
-      diagBox = document.createElement('div');
-      diagBox.id = '__diag';
-      diagBox.style.cssText = 'position:fixed;left:8px;bottom:8px;max-width:480px;font:12px ui-monospace,monospace;background:#fee;color:#900;border:1px solid #faa;border-radius:6px;padding:8px;z-index:9999;line-height:1.4';
-      var close = document.createElement('button');
-      close.textContent = 'x';
-      close.style.cssText = 'float:right;border:none;background:transparent;cursor:pointer;color:#900;font:14px monospace';
-      close.onclick = function () { diagBox.style.display = 'none'; };
-      diagBox.appendChild(close);
-      document.body.appendChild(diagBox);
-    }
-    var line = document.createElement('div');
-    line.textContent = msg;
-    diagBox.appendChild(line);
+    console.warn('[DyMoS] ' + msg);
   }
 
   function el(tag, attrs, children) {
