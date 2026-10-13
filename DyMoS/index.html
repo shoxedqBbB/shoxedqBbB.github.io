@@ -20,13 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- CSS (MPD template stack) -->
+  <!-- CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="static/css/fontawesome.all.min.css"></noscript>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -35,16 +31,12 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- JS -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
 </head>
 
 <body>
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
   <main id="main-content">
@@ -95,14 +87,14 @@
                   <span class="link-block">
                     <a href="https://arxiv.org/abs/2605.19398" target="_blank" rel="noopener"
                        class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                      <span class="icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
                       <span>arXiv</span>
                     </a>
                   </span>
                   <span class="link-block">
                     <a href="https://github.com/shoxedqBbB/DyMoS" target="_blank" rel="noopener"
                        class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span class="icon"><svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>
                       <span>Code</span>
                     </a>
                   </span>
@@ -122,7 +114,7 @@
           <div class="teaser-blocks">
             <div class="teaser-block">
               <div class="teaser-block-title">Dynamic image-to-video generation</div>
-              <video class="teaser-row-video" src="assets/teaser_a.mp4" autoplay muted loop playsinline preload="metadata"></video>
+              <video class="teaser-row-video" src="assets/teaser_a.mp4" poster="assets/teaser_a.jpg" autoplay muted loop playsinline preload="metadata"></video>
               <div class="teaser-row-labels">
                 <span>CogVideoX</span>
                 <span class="is-ours">DyMoS</span>
@@ -132,7 +124,7 @@
             </div>
             <div class="teaser-block">
               <div class="teaser-block-title">Continuous control over motion dynamics</div>
-              <video class="teaser-row-video" src="assets/teaser_b.mp4" autoplay muted loop playsinline preload="metadata"></video>
+              <video class="teaser-row-video" src="assets/teaser_b.mp4" poster="assets/teaser_b.jpg" autoplay muted loop playsinline preload="metadata"></video>
               <div class="static-dynamic-arrow teaser-bar">
                 <span class="sd-static">Static</span>
                 <div class="sd-bar"></div>
@@ -183,9 +175,6 @@
         <div class="columns is-centered">
           <div class="column is-full">
             <h2 class="title is-3 has-text-centered">Baseline comparisons</h2>
-            <p class="has-text-centered" style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-              Loading videos may take a moment — thanks for your patience!
-            </p>
             <div id="dynamic-container"></div>
           </div>
         </div>
@@ -199,9 +188,6 @@
           <div class="columns is-centered">
             <div class="column is-full">
               <h2 class="title is-3 has-text-centered">Applications: continuous control over motion dynamics</h2>
-              <p class="has-text-centered" style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-                Drag the slider to control motion strength!
-              </p>
               <div id="continuous-container"></div>
             </div>
           </div>
@@ -215,7 +201,7 @@
         <div class="bibtex-header">
           <h2 class="title">BibTeX</h2>
           <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-            <i class="fas fa-copy"></i>
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-0.15em"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
             <span class="copy-text">Copy</span>
           </button>
         </div>

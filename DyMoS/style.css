@@ -234,8 +234,6 @@
   width: 100%; height: 100%; display: block; object-fit: cover;
 }
 /* Hide videos that are still loading inside a sync group, fade in together */
-video.sync-pending { opacity: 0; }
-video.sync-ready   { opacity: 1; transition: opacity .25s ease-out; }
 
 .cell-label {
   margin-top: 0.4rem; text-align: center;

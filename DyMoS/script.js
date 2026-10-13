@@ -39,6 +39,7 @@
     v.setAttribute('webkit-playsinline', '');
     if (opts.autoplay !== false) v.setAttribute('autoplay', '');
     v.src = src;
+    v.poster = src.replace(/\.mp4$/, '.jpg');
     v.addEventListener('error', function () { diag('video error: ' + src); }, { once: true });
     return v;
   }
@@ -55,7 +56,6 @@
     if (!g) return;
     g.videos.push(v);
     v.dataset.syncGroup = id;
-    v.classList.add('sync-pending');   // hide until the whole group is ready
     var onReady = function () {
       v.removeEventListener('canplay', onReady);
       tryPlaySyncGroup(g);
@@ -69,8 +69,6 @@
     g.started = true;
     g.videos.forEach(function (v) {
       try { v.currentTime = 0; } catch (_) {}
-      v.classList.remove('sync-pending');
-      v.classList.add('sync-ready');
       var p = v.play();
       if (p && typeof p.catch === 'function') p.catch(function () {});
     });
