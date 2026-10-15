@@ -348,6 +348,28 @@
     // Reset all to start, then play simultaneously
     group.videos.forEach(v => { try { v.currentTime = 0; } catch (_) {} });
     group.videos.forEach(v => { v.play().catch(() => {}); });
+    keepInSync(group);
+  }
+  // First video is the master; followers are continuously pulled back to it so
+  // independent loops, buffering stalls, or tab switches can't make them drift.
+  function keepInSync(group) {
+    const [master, ...followers] = group.videos;
+    if (!followers.length) return;
+    const DRIFT = 0.06; // seconds (~1.5 frames)
+    const tick = () => {
+      if (master.paused || master.readyState < 3) {
+        // Master stalled (buffering) — hold followers so they don't run ahead
+        followers.forEach(f => { if (!f.paused) f.pause(); });
+      } else {
+        const t = master.currentTime;
+        followers.forEach(f => {
+          if (Math.abs(f.currentTime - t) > DRIFT) f.currentTime = t;
+          if (f.paused && !f.seeking) f.play().catch(() => {});
+        });
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   }
 
   // ---------- Flip card toggle ----------

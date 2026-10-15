@@ -72,6 +72,35 @@
       var p = v.play();
       if (p && typeof p.catch === 'function') p.catch(function () {});
     });
+    keepInSync(g);
+  }
+  // First video is the master; followers are continuously pulled back to it so
+  // independent loops, buffering stalls, or tab switches can't make them drift.
+  // Runs only while the group is started; pauseSyncGroup ends the loop.
+  var SYNC_DRIFT = 0.06; // seconds (~1.5 frames)
+  function keepInSync(g) {
+    if (g.syncing || g.videos.length < 2) return;
+    g.syncing = true;
+    var master = g.videos[0];
+    var followers = g.videos.slice(1);
+    function tick() {
+      if (!g.started) { g.syncing = false; return; }
+      if (master.paused || master.readyState < 3) {
+        // Master stalled (buffering) — hold followers so they don't run ahead
+        followers.forEach(function (f) { if (!f.paused) f.pause(); });
+      } else {
+        var t = master.currentTime;
+        followers.forEach(function (f) {
+          if (Math.abs(f.currentTime - t) > SYNC_DRIFT) f.currentTime = t;
+          if (f.paused && !f.seeking) {
+            var p = f.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+          }
+        });
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
   function pauseSyncGroup(g) {
     g.started = false;
