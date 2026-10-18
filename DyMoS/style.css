@@ -326,7 +326,8 @@
   position: absolute; inset: 0;
   width: 100%; height: 100%; display: block; object-fit: cover;
 }
-.video-stack video.hidden { display: none; }
+/* Keep alternative strengths on the shared clock while only one is visible. */
+.video-stack video.hidden { opacity: 0; pointer-events: none; }
 
 .slider-caption {
   display: flex; flex-direction: column; gap: 0.3rem;
@@ -437,3 +438,58 @@
 /* Pull the teaser closer to the header */
 .publication-header .hero-body { padding-bottom: 1.5rem; }
 .teaser .hero-body { padding-top: 0.5rem; }
+
+/* Explicit playback controls; the publication layout above stays unchanged. */
+.playback-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+.teaser-block > .playback-controls,
+.video-slider > .playback-controls { margin-top: 0; }
+.playback-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 9999px;
+  background: var(--text-primary);
+  color: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.playback-toggle:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.playback-toggle:focus-visible,
+.slider-input:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+}
+.playback-icon { width: 1em; text-align: center; }
+.playback-time {
+  color: var(--text-secondary);
+  font: 0.75rem/1.5 'SF Mono', Monaco, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.playback-status {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  text-align: left;
+  margin-top: 0.4rem;
+}
+.playback-status:empty { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .playback-toggle { transition: none; }
+}
